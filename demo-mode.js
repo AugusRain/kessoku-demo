@@ -43,7 +43,7 @@
     if (pathname === '/api/gan/enhance') return GAN_RESULT
     if (pathname === '/api/simulation/scenario') return MOCK['/api/simulation/scenario'] || {}
     if (pathname.indexOf('/api/monitor/') === 0) return MOCK['/api/health'] || {}
-    if (pathname.indexOf('/api/platform/checks/') === 0) return { ok: true, name: pathname.split('/')[4], status: 'passed', detail: '静态演示：未实际执行' }
+    if (pathname.indexOf('/api/platform/checks/') === 0) return { ok: true, name: pathname.split('/')[4], status: 'passed', detail: '未执行' }
     return { ok: true, accepted: true }
   }
 
@@ -137,19 +137,6 @@
   function boot() {
     scan(document.body)
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] })
-    addBadge()
-  }
-
-  function addBadge() {
-    var el = document.createElement('div')
-    el.textContent = '静态演示 · 数据为录制快照 · 完整功能请本地启动平台'
-    el.setAttribute('style', [
-      'position:fixed', 'right:14px', 'bottom:14px', 'z-index:2147483647',
-      'padding:7px 12px', 'border-radius:999px', 'font:12px/1.5 -apple-system,Segoe UI,Microsoft YaHei,sans-serif',
-      'color:#b9f2f6', 'background:rgba(11,17,23,.86)', 'border:1px solid rgba(54,203,210,.45)',
-      'box-shadow:0 4px 18px rgba(0,0,0,.35)', 'pointer-events:none', 'letter-spacing:.2px',
-    ].join(';'))
-    document.body.appendChild(el)
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot)
